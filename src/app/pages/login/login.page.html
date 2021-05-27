@@ -1,0 +1,36 @@
+
+<ion-content>
+  <div class="login-logo">
+    <img src="assets/icon/noteicon.png" class="logo_icon">
+    <p class="login_name">Noteei</p>
+  </div>
+  <ion-card>
+  <form #loginForm="ngForm">
+    <ion-list lines="none">
+      <ion-item lines="none">
+      <ion-input [(ngModel)]="email" placeholder="Email" name="email"required></ion-input>
+
+    </ion-item>
+    <ion-item lines="none">
+      <ion-input [(ngModel)]="password" placeholder="Password" name="password" type="password" required></ion-input>
+
+    </ion-item>
+    </ion-list>
+    <ion-row class="ion-no-margin ion-no-padding">
+      <ion-col class="ion-no-margin ion-no-padding">
+        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block" color="secondary" class="btn_class">
+          Login
+          </ion-button>
+
+
+       <label class="errorMessage">{{errorMessage}}</label>
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-card>
+
+  <p (click)="registor()" class="createAcc">Don't You Have An Account?
+  <span class="signup">Sign Up</span>
+</p>
+
+</ion-content>

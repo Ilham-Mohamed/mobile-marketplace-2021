@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <h2>Take a Note</h2>
+    </ion-title>
+
+    <ion-icon name="power-outline" (click)="signout()" slot="end" style="zoom:2.0;"></ion-icon>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="postcard" class="full-height">
+
+        <ion-list lines="none">
+          <ion-item>
+            <ion-input placeholder=" Enter Title" [(ngModel)]="note.title"></ion-input>
+
+          </ion-item>
+          <div style="height: 20px;"></div>
+          <ion-item>
+            <textarea #myInput id="myInput" class="textarea" placeholder="Enter More infrmation" rows="20" maxLength="10000" (keyup)="resize()" [(ngModel)]="note.content" lines="none" ></textarea>
+
+          </ion-item>
+
+        </ion-list>
+
+
+
+
+
+    </div>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add-circle-outline" (click)="addNote()"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+
+
+  </ion-content>

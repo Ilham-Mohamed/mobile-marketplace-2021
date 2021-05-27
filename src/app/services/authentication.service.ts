@@ -1,41 +1,63 @@
-import { Injectable } from '@angular/core';
-import {AngularFireAuth} from '@angular/fire/auth';
-import {AngularFirestore} from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+// authentication.service.ts
+import { Injectable } from "@angular/core";
+import { AngularFireAuth } from '@angular/fire/auth';
+import { NavController } from "@ionic/angular";
 
+import '@firebase/auth';
+import {firebase} from '@firebase/app';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
-  userData;
-  constructor(private ngFireAuth:AngularFireAuth, private router:Router, public afStore:AngularFirestore) { 
-    this.ngFireAuth.authState.subscribe(user =>{
-      if(user){
-        this.userData = user; 
-        localStorage.setItem('user', JSON.stringify(this.userData))
-      }
-      else{
-        localStorage.setItem('user', null);
-      }
+export class AuthenticateService {
+
+  constructor(
+    private afAuth: AngularFireAuth,
+    private navCtrl: NavController,
+    private router : Router
+
+
+  ) { }
+
+  registerUser(value) {
+    return new Promise<any>((resolve, reject) => {
+
+      this.afAuth.createUserWithEmailAndPassword(value.email, value.password)
+        .then(
+          res => resolve(res),
+          err => reject(err))
+
+    });
+
+  }
+
+  loginUser(value) {
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.signInWithEmailAndPassword(value.email, value.password)
+        .then(
+          res => resolve(res),
+          err => reject(err))
+
     })
   }
 
-  SignIn(email, password){
-    return this.ngFireAuth.signInWithEmailAndPassword(email, password);
+  public async signout(): Promise<any> {
+
+
+    try {
+      this.router.navigateByUrl('');
+
+      return await this.afAuth.signOut();
+
+    } catch (e) {
+      console.error("big hu?", e);
+    }
+
+
   }
 
-  RegisterUser(email, password){
-    return this.ngFireAuth.createUserWithEmailAndPassword(email, password);
+  userDetails() {
+    return this.afAuth.user;
   }
-
-  SignOut()
-  {
-    return this.ngFireAuth.signOut();
-  }
-
-  getUser(){
-    return this.ngFireAuth.user;
-  }
-
 }
