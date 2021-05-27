@@ -19,8 +19,8 @@ import { UserDetailsService } from './user-details.service';
   providedIn: 'root'
 })
 export class FirebbaseService {
-  public  static notes : Observable<Note[]>;
-  public noteCollection:AngularFirestoreCollection<Note>;
+  public static notes : Observable<Note[]>;
+  public static noteCollection:AngularFirestoreCollection<Note>;
 
   public  static details : Observable<Details[]>;
   public detailsCollection:AngularFirestoreCollection<Details>;
@@ -33,10 +33,10 @@ export class FirebbaseService {
     console.log("addpage " + GetuidComponent.uid);
     //define collection
     //this.noteCollection=this.afs.collection<Note>('notes');
-    this.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
-    this.detailsCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Details>('user_details');
+    FirebbaseService.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
+   this.detailsCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Details>('user_details');
     //get collection data
-    FirebbaseService.notes=this.noteCollection.snapshotChanges().pipe(
+    FirebbaseService.notes=FirebbaseService.noteCollection.snapshotChanges().pipe(
       map(action=>{
         return action.map(a=>{
           //get other datat
@@ -55,6 +55,24 @@ export class FirebbaseService {
 
   }
   ngOnInit() {
+    console.log("inside init    "+GetuidComponent.uid);
+    FirebbaseService.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
+    this.detailsCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Details>('user_details');
+    FirebbaseService.notes=FirebbaseService.noteCollection.snapshotChanges().pipe(
+      map(action=>{
+        return action.map(a=>{
+          //get other datat
+          const data=a.payload.doc.data();
+          //get key
+          const id=a.payload.doc.id;
+          console.log(id);
+          //return
+          return {id,...data};
+        });
+      })
+    );
+
+
   }
   addimageData(url:string){
     this.afs.collection('notes').doc(GetuidComponent.uid).update({
@@ -73,12 +91,13 @@ export class FirebbaseService {
 
   //getting all notes
   getNotes(): Observable<Note[]>{
+    console.log(GetuidComponent.uid);
       return FirebbaseService.notes;
   }
 
   //get single note by id
   getNote(id:string):Observable<Note>{
-    return this.noteCollection.doc<Note>(id).valueChanges().pipe(
+    return FirebbaseService.noteCollection.doc<Note>(id).valueChanges().pipe(
       take(1),
       map(note=>{
         note.id=id;
@@ -90,11 +109,11 @@ export class FirebbaseService {
   //create new note
   addNote(note:Note):Promise<DocumentReference>{
     console.log("adding to firebase");
-    return this.noteCollection.add(note);
+    return FirebbaseService.noteCollection.add(note);
   }
 
   updateNote(note : Note):Promise<void>{
-    return this.noteCollection.doc(note.id).update(
+    return FirebbaseService.noteCollection.doc(note.id).update(
       {
         title:note.title,
         content:note.content,
@@ -114,7 +133,7 @@ export class FirebbaseService {
 
 
   deleteNote(id:string):Promise<void>{
-    return this.noteCollection.doc(id).delete();
+    return FirebbaseService.noteCollection.doc(id).delete();
   }
 
 

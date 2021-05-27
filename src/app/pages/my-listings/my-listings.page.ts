@@ -37,7 +37,7 @@ export class MyListingsPage implements OnInit {
      }, 1000);
     }
 
-    async ngOnInit() {
+  ngOnInit() {
 
     this.fbSerice.ngOnInit();
 
@@ -51,13 +51,7 @@ export class MyListingsPage implements OnInit {
 
   }
   signout(){
-    this.ngFireAuth.authState.subscribe(user=>{
-      if(user){
 
-        localStorage.setItem('user',JSON.stringify(user));
-      }
-
-    })
 
     this.auths.Signout();
     this.router.navigate(['']);

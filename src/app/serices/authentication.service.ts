@@ -7,6 +7,7 @@ import '@firebase/auth';
 import {firebase} from '@firebase/app';
 import { Router } from "@angular/router";
 import {AngularFirestore} from '@angular/fire/firestore';
+import { GetuidComponent } from "../model/getuid/getuid.component";
 
 
 
@@ -54,7 +55,18 @@ export class AuthenticationService {
 
 
   }
-  Signout(){
-    return this.ngFireAuth.signOut();
+  public async Signout(): Promise<any> {
+
+
+    try {
+      this.router.navigateByUrl('');
+
+      return await this.ngFireAuth.signOut();
+
+    } catch (e) {
+      console.error("big hu?", e);
+    }
+
+
   }
 }
