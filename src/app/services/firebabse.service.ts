@@ -31,7 +31,7 @@ export class FirebbaseService {
     ) {
     //getUid.uid=firebase.auth().currentUser.uid;
     console.log("addpage " + GetuidComponent.uid);
-    //define collection
+    //define collections
     //this.noteCollection=this.afs.collection<Note>('notes');
     FirebbaseService.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
    this.detailsCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Details>('user_details');
