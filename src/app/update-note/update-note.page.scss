@@ -19,7 +19,7 @@
   border: none;
   overflow: auto;
   outline: none;
-
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -48,4 +48,7 @@ ion-card{
   margin-left: 10%;
   margin-right: 10%;
 
+}
+ion-input{
+  font-size: 1.5em;
 }
