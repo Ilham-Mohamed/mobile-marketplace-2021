@@ -12,7 +12,7 @@
     <ion-card-title>{{note.title}}</ion-card-title>
   </ion-card-header>
   <ion-card-content>
-    <p align="justify">{{note.content}}</p>
+    <p align="left">{{note.content}}</p>
     <br>
     <ion-button slot="start" color="warning" [routerLink]="'/update-note/' + note.id">Edit</ion-button>
     <ion-button slot="end" color="danger" (click) = "deleteNote()">Delete</ion-button>
