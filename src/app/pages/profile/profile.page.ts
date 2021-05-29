@@ -95,6 +95,12 @@ public loadingController: LoadingController
     this.router.navigate(['']);
 
   }
+  choose(){
+    if(this.selectedImage!=null){
+      return false;
+    }
+    return true;
+  }
   delete(downloadUrl) {
     try{
       return this.storage.storage.refFromURL(downloadUrl).delete();
@@ -104,7 +110,8 @@ public loadingController: LoadingController
 
   }
   save() {
-    var name = this.selectedImage.name;
+
+   var name= this.selectedImage.name;
     console.log(name);
     this.presentLoading();
     this.uploading="uploading your image please wait";

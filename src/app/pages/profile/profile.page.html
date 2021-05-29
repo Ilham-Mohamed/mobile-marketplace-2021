@@ -15,7 +15,7 @@
   </div>
   <div style="text-align: center;">
     <input type="file" (change)="showPreview($event)">
-<ion-button (click)="save()">Change It</ion-button>
+<ion-button (click)="save()" [class.button-disabled]="choose()" >Change It</ion-button>
   </div>
   <div style="text-align: center;">
     <ion-list *ngFor="let note of (user|async)">
