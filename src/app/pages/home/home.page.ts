@@ -38,6 +38,7 @@ private udtl:UserDetailsService,
   ) { }
 
   ngOnInit() {
+
     this.udtl.ngOnInit();
       console.log("profile page constructor");
       this.user=this.udtl.getNotes();
