@@ -32,7 +32,7 @@ export class ProfilePage implements OnInit {
   oc:string;
   uploading:string;
   imageuri:string;
-
+  static username:string;
 
 
 
@@ -58,6 +58,7 @@ public loadingController: LoadingController
       this.uploading="";
      this.user.subscribe(x => x.forEach(p=>{
        this.imageuri=p.imageuri;
+       ProfilePage.username=p.fname;
      }))
 
     }

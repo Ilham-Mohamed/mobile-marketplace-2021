@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <h2>Take a Note</h2>
+      <h2>Add Item Details</h2>
     </ion-title>
 
     <ion-icon name="power-outline" (click)="signout()" slot="end" style="zoom:2.0;"></ion-icon>
@@ -15,12 +15,12 @@
 
         <ion-list lines="none">
           <ion-item>
-            <ion-input placeholder=" Enter Title" [(ngModel)]="note.title" class="t1"></ion-input>
+            <ion-input placeholder=" Enter Item Name" [(ngModel)]="note.title" class="t1"></ion-input>
 
           </ion-item>
           <div style="height: 20px;"></div>
           <ion-item>
-            <textarea #myInput id="myInput" class="textarea" placeholder="Enter More infrmation" rows="20" maxLength="10000" (keyup)="resize()" [(ngModel)]="note.content" lines="none" ></textarea>
+            <textarea #myInput id="myInput" class="textarea" placeholder="Enter item infrmation" rows="20" maxLength="10000" (keyup)="resize()" [(ngModel)]="note.content" lines="none" ></textarea>
 
           </ion-item>
 

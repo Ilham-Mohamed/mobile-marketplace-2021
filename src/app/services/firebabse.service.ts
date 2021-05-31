@@ -33,7 +33,10 @@ export class FirebbaseService {
     console.log("addpage " + GetuidComponent.uid);
     //define collections
     //this.noteCollection=this.afs.collection<Note>('notes');
-    FirebbaseService.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
+    FirebbaseService.noteCollection=this.afs.collection<Note>('notes', ref=>
+      ref.orderBy('createAt', 'desc')
+    )
+    //FirebbaseService.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
    this.detailsCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Details>('user_details');
     //get collection data
     FirebbaseService.notes=FirebbaseService.noteCollection.snapshotChanges().pipe(
@@ -56,7 +59,9 @@ export class FirebbaseService {
   }
   ngOnInit() {
     console.log("inside init    "+GetuidComponent.uid);
-    FirebbaseService.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
+    //FirebbaseService.noteCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Note>('data');
+    FirebbaseService.noteCollection=this.afs.collection<Note>('notes', ref=>
+    ref.orderBy('createAt', 'desc'));
     this.detailsCollection=this.afs.collection('notes').doc(GetuidComponent.uid).collection<Details>('user_details');
     FirebbaseService.notes=FirebbaseService.noteCollection.snapshotChanges().pipe(
       map(action=>{

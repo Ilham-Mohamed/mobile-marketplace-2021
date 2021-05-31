@@ -14,7 +14,8 @@ export class ViewPage implements OnInit {
     id:'',
     title:'',
     content:'',
-    createAt:''
+    createAt:'',
+    name:''
   };
   constructor(private fbSerice:FirebbaseService,
 
