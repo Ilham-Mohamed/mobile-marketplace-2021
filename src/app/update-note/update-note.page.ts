@@ -42,6 +42,7 @@ export class UpdateNotePage implements OnInit {
   resize() {
     this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
 }
+  //loading screen code
 async presentLoading() {
   const loading = await this.loadingController.create({
     cssClass: 'my-custom-class',
