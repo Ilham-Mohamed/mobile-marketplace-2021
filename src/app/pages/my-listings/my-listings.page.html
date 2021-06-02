@@ -1,7 +1,9 @@
+<ion-app>
+
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      <h2>Past Notes</h2>
+      <h2>Item List</h2>
     </ion-title>
 
     <ion-icon name="power-outline" (click)="signout()" slot="end" style="zoom:2.0;"></ion-icon>
@@ -9,34 +11,31 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<div>
   <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-item lines="none">
         <ion-label style="font-weight: 800; font-size:1.5em;">
-          Today
           <p class="txt-time" slot="end">{{time | date:'mediumTime'}}</p>
           <h2>{{today| date:'fullDate'}}</h2>
-
+          <br>
+          <ion-searchbar placeholder="Search..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
 
         </ion-label>
-
-
-
-
 
 
       </ion-item>
     </ion-toolbar>
   </ion-header>
+</div>
   <ion-content [fullscreen]="true">
-    <ion-searchbar placeholder="Search..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+
     <ion-list *ngFor="let note of (notes|async) | filter:filterTerm">
       <ion-card>
       <ion-card-header>
         <ion-card-subtitle>
           {{note.createAt|date:'mediumDate'}}
+          added by {{note.name}}
         </ion-card-subtitle>
         <ion-item lines="none">
           <ion-icon name="clipboard-outline"></ion-icon>
@@ -54,6 +53,7 @@
   </ion-content>
 
 
+</ion-app>
 
 
 

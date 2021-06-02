@@ -36,5 +36,8 @@ export class EditpagePage implements OnInit {
     console.log("update successfull");
     this.router.navigateByUrl('tabs/profile');
   }
+  back(){
+    this.router.navigate(['tabs/profile']);
+  }
 
 }

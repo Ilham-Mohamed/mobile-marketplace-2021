@@ -10,6 +10,7 @@ import { first } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { GetuidComponent } from 'src/app/model/getuid/getuid.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-my-listings',
   templateUrl: './my-listings.page.html',
@@ -18,6 +19,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 export class MyListingsPage implements OnInit {
   public notes:Observable<Note[]>;
   public backupnote:Observable<Note[]>;
+  things$: Observable<Note[]>;
   today:number=  Date.now();
   public time;
   public noteList: any[];
@@ -29,7 +31,8 @@ export class MyListingsPage implements OnInit {
     private ngFireAuth:AngularFireAuth,
     private fbSerice:FirebbaseService,
               private fbauth:AuthenticateService,
-              private firestore: AngularFirestore
+              private firestore: AngularFirestore,
+              public loadingController: LoadingController
 
     ) {
       setInterval(() => {
@@ -44,6 +47,17 @@ export class MyListingsPage implements OnInit {
     this.notes=this.fbSerice.getNotes();
     console.log("my listing loadeed");
 
+  }
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Please wait...',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+    console.log('Loading dismissed!');
   }
 
 

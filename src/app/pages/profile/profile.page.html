@@ -14,10 +14,13 @@
 
   </div>
   <div style="text-align: center;">
-    <input type="file" (change)="showPreview($event)">
-<ion-button (click)="save()">Change It</ion-button>
+    <input type="file" (change)="showPreview($event)" class="custom-file-input">
+<ion-button (click)="save()" [class.button-disabled]="choose()" >Change It</ion-button>
   </div>
+
+
   <div style="text-align: center;">
+    <ion-card>
     <ion-list *ngFor="let note of (user|async)">
       <h5>First Name : {{note.fname}}</h5>
       <h5>Last Name : {{note.lname}}</h5>
@@ -25,10 +28,9 @@
 
     </ion-list>
 <ion-button (click)="gotoEdit()">Update Details</ion-button>
+</ion-card>
+  </div>
 
-  </div>
-  <div>
-    <h5>{{uploading}}</h5>
-  </div>
+
 
 </ion-content>

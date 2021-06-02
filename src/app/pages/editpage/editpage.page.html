@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Edit Your Details</ion-title>
+    <ion-button slot="end" (click)="back()">Go Back</ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -9,7 +10,7 @@
 
 
   <div class = "emailForm">
-    <h2 class = "ion-text-center header_lbl">Sign Up</h2>
+    <h2 class = "ion-text-center header_lbl">Edit Your Personal Details</h2>
     <form [formGroup]="registration_form">
       <ion-item lines="full">
         <ion-label position="floating">First Name</ion-label>
